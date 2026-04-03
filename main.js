@@ -1,4 +1,5 @@
-const { app, BrowserWindow, session } = require('electron');
+const { app, BrowserWindow, session, dialog } = require('electron');
+const { autoUpdater } = require('electron-updater');
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -31,7 +32,35 @@ function createWindow() {
   win.setMenu(null);
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  createWindow();
+  // Auto-update: check GitHub Releases for new versions
+  autoUpdater.autoDownload = false;
+  autoUpdater.checkForUpdates().catch(() => {});
+  autoUpdater.on('update-available', () => {
+    dialog.showMessageBox({
+      type: 'info',
+      title: 'Update Available',
+      message: 'A new version of Rigour Hero is available!',
+      buttons: ['Update Now', 'Later'],
+      defaultId: 0,
+    }).then(result => {
+      if (result.response === 0) {
+        autoUpdater.downloadUpdate();
+      }
+    });
+  });
+  autoUpdater.on('update-downloaded', () => {
+    dialog.showMessageBox({
+      type: 'info',
+      title: 'Update Ready',
+      message: 'Update downloaded. Rigour Hero will restart to apply it.',
+      buttons: ['Restart Now'],
+    }).then(() => {
+      autoUpdater.quitAndInstall();
+    });
+  });
+});
 
 app.on('window-all-closed', () => {
   app.quit();

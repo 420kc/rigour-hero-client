@@ -1,6 +1,6 @@
 {
   "name": "rigour-hero",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Rigour Hero Desktop Client",
   "main": "main.js",
   "scripts": {
@@ -13,10 +13,16 @@
     "win": {
       "target": "nsis",
       "icon": "icon.png"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "420kc",
+      "repo": "rigour-hero-client"
     }
   },
   "devDependencies": {
     "electron": "^41.1.1",
-    "electron-builder": "^26.8.1"
+    "electron-builder": "^26.8.1",
+    "electron-updater": "^6.8.3"
   }
 }
