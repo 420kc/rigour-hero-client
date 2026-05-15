@@ -1,8 +1,10 @@
 # Rigour Hero Desktop Client
 
-## What is this?
+The Rigour Hero Desktop Client is a lightweight Electron wrapper for [rigourhero.com](https://rigourhero.com), built to give the game a clean desktop install without forking the live web product.
 
-The Rigour Hero Desktop Client is a lightweight app that runs the game in its own window — no browser needed. It loads the latest version of Rigour Hero directly from rigourhero.com every time you open it, so you're always playing the most up-to-date version.
+It loads the current production game on launch, so the desktop client stays thin while the real game continues shipping on the web.
+
+## What is this?
 
 ## Is it safe?
 
